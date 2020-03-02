@@ -26,8 +26,8 @@ class Game:   # God Object
         self.pt = pt
         self.qt = qt
         
-    def read(self, file):
-        payoff = pd.read_csv(file, index_col=0)
+    def read(self, file, **options):
+        payoff = pd.read_csv(file, index_col=0, **options)
         self.__init__(payoff)
         return self
     
@@ -36,12 +36,12 @@ class Game:   # God Object
         fig.update_layout(
             xaxis = dict(
                 tickmode = 'array',
-                tickvals = [0, 1, 2],
+                tickvals = np.arange(len(self.payoff.index)),
                 ticktext = self.payoff.index
             ),
             yaxis = dict(
                 tickmode = 'array',
-                tickvals = [0, 1, 2],
+                tickvals = np.arange(len(self.payoff.index)),
                 ticktext = self.payoff.index
             ),
         )
